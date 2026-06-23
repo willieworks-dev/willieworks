@@ -1,0 +1,47 @@
+# OS
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Editors / IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Secrets and local environment
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets/
+
+# Logs and temporary files
+*.log
+*.tmp
+*.temp
+*.bak
+
+# Dependencies and build outputs
+node_modules/
+dist/
+build/
+coverage/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Codex local work
+.agents/
+.codex/
+work/
+outputs/
+
+# Local data (keep directory placeholder and documentation)
+data/*
+!data/.gitkeep
+!data/README.md
