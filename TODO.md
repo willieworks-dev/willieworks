@@ -6,7 +6,6 @@
 
 ## 次回対応
 
-- [ ] MacBookにも同じ個人用GitHub分離設定を行う
 - [ ] 使用技術とアプリケーションの目的を確定する
 - [ ] MacとWindowsそれぞれのセットアップ手順を検証する
 - [ ] 既定ブランチとブランチ運用ルールを確定する
@@ -20,6 +19,11 @@
 
 ## 完了
 
+- [x] MacBook専用の個人SSH鍵とSSHホスト別名 `github-personal` を設定する（2026-06-24）
+- [x] MacBookから個人GitHubアカウント `willieworks-dev` のSSH認証を確認する（2026-06-24）
+- [x] MacBookの `/Users/kenjiyoshida/Documents/Codex/willieworks` へcloneする（2026-06-24）
+- [x] MacBook側のリポジトリローカルに個人用コミット情報を設定する（2026-06-24）
+- [x] MacBook側で `git pull --ff-only` を確認する（2026-06-24）
 - [x] 初回コミットを作成して `origin/main` へpushする（2026-06-23）
 - [x] Windowsの作業フォルダを `C:\Users\kenji yoshida\Projects\willieworks` に作成する（2026-06-23）
 - [x] プロジェクトファイルを新しい作業フォルダへ複製する（2026-06-23）

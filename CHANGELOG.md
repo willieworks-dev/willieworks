@@ -1,5 +1,23 @@
 # CHANGELOG
 
+## 2026-06-24
+
+### 変更内容
+
+- MacBook専用の個人SSH鍵を作成し、SSHホスト別名 `github-personal` へ固定
+- 個人GitHubアカウント `willieworks-dev` へのSSH認証を確認
+- `/Users/kenjiyoshida/Documents/Codex/willieworks` へPrivateリポジトリをclone
+- MacBook側のリポジトリローカルに個人用コミットユーザー名とnoreplyメールを設定
+- remote、所有者、認証アカウント、ブランチ、作業状態を確認
+- `git pull --ff-only` でGitHub上の最新状態と一致することを確認
+- READMEへ確定したnoreplyメールとMacBookの作業フォルダを反映
+
+### 変更理由
+
+- 会社GitHubと個人GitHubをMacBook上でも完全に分離するため
+- WindowsとMacBookから同じPrivateリポジトリを安全に利用するため
+- グローバルGit設定を変更せず、個人用コミット情報を本リポジトリだけに限定するため
+
 ## 2026-06-23
 
 ### 変更内容

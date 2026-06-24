@@ -18,7 +18,7 @@
 6. APIキーや機密情報は環境変数またはGit管理外のローカル設定で扱う。
 7. GitHubのコミットメールにはGitHub提供の `noreply` アドレスを使用する。
 
-> `noreply` アドレスと具体的な技術スタックは未設定です。確定後に本手順を更新します。
+> GitHubのコミットメールは `296127537+willieworks-dev@users.noreply.github.com` を使用します。具体的な技術スタックは未設定です。
 
 ## ディレクトリ構成
 
@@ -78,9 +78,9 @@
 
 会社GitHubへの影響を防ぐため、`--global` は使用しません。本リポジトリを初期化した後、リポジトリ内だけに次を設定します。
 
-```powershell
+```shell
 git config --local user.name "willieworks-dev"
-git config --local user.email "取得したnoreplyメール"
+git config --local user.email "296127537+willieworks-dev@users.noreply.github.com"
 ```
 
 設定後は次のコマンドで確認し、個人用情報でなければGitHub操作を中止します。
@@ -128,6 +128,8 @@ git remote -v
 - コンフリクトが発生した場合は内容を確認し、自動的に既存変更を破棄しない。
 - MacBookとWindowsの両方で、個人用の専用SSH鍵とSSHホスト別名を設定する。
 - Windowsの作業フォルダは `C:\Users\kenji yoshida\Projects\willieworks` とする。
+- MacBookの作業フォルダは `/Users/kenjiyoshida/Documents/Codex/willieworks` とする。
+- MacBookではSSHホスト別名 `github-personal` とMacBook専用鍵を使用する。
 - `.gitattributes` によりテキストファイルの改行を原則LFへ統一する。
 
 ## 今後の開発方針
