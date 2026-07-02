@@ -2,6 +2,11 @@
 
 Use these patterns after reading live sheet metadata and existing formulas. Prefer adapting from existing rows through copy/paste, then overwrite only `userEnteredValue` where campaign names and sheet references change.
 
+When writing formulas into report rows, prefer Sheets API `updateCells` with
+`userEnteredValue.formulaValue`. Avoid `pasteData` for formula repair or newly
+inserted report rows: cells that inherited a plain-text number format can store
+`=SUM(...)` as literal text, causing visible formula strings or `#VALUE!`.
+
 For monthly total rows and monthly report blocks, also read `monthly-rollover.md`.
 
 ## Workbook Structure
@@ -62,9 +67,9 @@ Google Sheets may remove quotes around sheet names like `N118_AB`; that is accep
 
 ## Weekly Report Row
 
-`📊レポート` weekly columns `A:M` are:
+`📊レポート` weekly columns are usually `A:V` in current workbooks:
 
-`CP名`, `広告費`, `CV`, `実CV`, `CVR`, `CPA`, `IMP`, `クリック`, `CPM`, `CTR`, `CPC`, `面談申込数`, `申込率`.
+`CP名`, `広告費`, `CV`, `実CV`, `CVR`, `CPA`, `IMP`, `クリック`, `CPM`, `CTR`, `CPC`, `面談申込数`, `申込率`, plus interview, contract, sales, ROAS, and ROI columns through `V`.
 
 For a new campaign tab named `<TAB>` on weekly row `{R}`:
 
@@ -82,9 +87,21 @@ J: =IFERROR(H{R}/G{R},0)
 K: =IFERROR(B{R}/H{R},0)
 L: =SUM(FILTER('<TAB>'!L:L,'<TAB>'!A:A>=TODAY()-7,'<TAB>'!A:A<TODAY()))
 M: =IF(D{R}=0,"",L{R}/D{R})
+N: =IFERROR(B{R}/L{R},"-")
+O: =SUM(FILTER('<TAB>'!O:O,'<TAB>'!A:A>=TODAY()-7,'<TAB>'!A:A<TODAY()))
+P: =IF(L{R}=0,"",O{R}/L{R})
+Q: =IF(O{R}=0,"",B{R}/O{R})
+R: =SUM(FILTER('<TAB>'!R:R,'<TAB>'!A:A>=TODAY()-7,'<TAB>'!A:A<TODAY()))
+S: =IF(O{R}=0,"",R{R}/O{R})
+T: =SUM(FILTER('<TAB>'!T:T,'<TAB>'!A:A>=TODAY()-7,'<TAB>'!A:A<TODAY()))
+U: =T{R}/B{R}
+V: =IF(B{R}=0,"",T{R}/(D{R}*1.2))
 ```
 
 Replace `{R}` with the local report row number. If adapting from an existing row, verify the final 申込率 formula after writing; the expected zero-check pattern is `=IF(D{R}=0,"",L{R}/D{R})`.
+Also verify the right-side metrics (`N:V`) on newly added rows and on the
+category total row. Older sheets may have partially populated weekly rows, so
+do not assume `N:V` is already complete.
 
 ## Aggregate Daily Rows
 
@@ -126,5 +143,10 @@ Before final response, verify:
 - `養成講座合計` or `ダイエット合計` row 8 formulas include the new tabs in each source-data column.
 - `📊レポート` previous-day rows exist under the right category.
 - `📊レポート` weekly rows exist under the right category.
-- Category total rows include the newly inserted rows.
+- Category total rows include the newly inserted rows, including `O`, `R`, and
+  `T` source totals in the right-side report columns.
 - No formulas in nearby existing rows were accidentally retargeted to the wrong campaign.
+- Re-read formatted values and/or CellData after edits. There should be no
+  accidental literal formula strings such as `=SUM(...)` and no new `#REF!` or
+  `#VALUE!` in the edited ranges. Existing `#DIV/0!` in zero-spend ROAS rows can
+  appear when the workbook's established formula is `=T/B`.
