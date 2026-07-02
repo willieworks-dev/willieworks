@@ -1,0 +1,4 @@
+interface:
+  display_name: "Add Google Sheets Campaign Tabs"
+  short_description: "Add campaign tabs/monthly rows to the current confirmation sheet"
+  default_prompt: "Use $add-google-sheets-campaign-tabs to add campaign tabs or monthly rows to the user-provided confirmation Google Sheet URL, then wire report formulas."

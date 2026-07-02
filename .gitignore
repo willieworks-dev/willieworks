@@ -37,7 +37,11 @@ venv/
 
 # Codex local work
 .agents/
-.codex/
+.codex/*
+!.codex/skills/
+.codex/skills/*
+!.codex/skills/add-google-sheets-campaign-tabs/
+!.codex/skills/add-google-sheets-campaign-tabs/**
 work/
 outputs/
 
